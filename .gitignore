@@ -1,0 +1,23 @@
+﻿# Arquivos privados / locais
+private/
+working/
+*.private.*
+*.local.*
+
+# Backups
+*.bak
+*.backup
+*~
+
+# Temporários
+tmp/
+temp/
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
