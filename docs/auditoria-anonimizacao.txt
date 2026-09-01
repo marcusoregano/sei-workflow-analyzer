@@ -1,0 +1,22 @@
+AUDITORIA DO SNAPSHOT PÚBLICO ANONIMIZADO
+================================================
+
+Arquivo: SEI_Workflow_Analyzer_v9.9.145_PUBLICO_ANONIMIZADO.txt
+SHA-256 público: E8AFE9F58EC95AAF8BD143BB97311973C44C71D9226012D11D6F0C0460BCE84A
+
+Contagens de identificadores operacionais reais conhecidos:
+- Processos NIT reais: 0
+- Processos 990 reais: 0
+- Fontes reais conhecidas: 0
+- Unidades reais NIT/ION ou NIT/SMF: 0
+- Domínio real do SEI: 0
+- Contratos reais conhecidos: 0
+- Credores/marcas operacionais conhecidos: 0
+- Valores reais específicos conhecidos: 0
+
+Observações:
+- O nome do autor e os créditos de autoria foram preservados.
+- A lógica foi mantida como snapshot estático; não foi feita refatoração funcional.
+- Dicionários reais foram substituídos por dados sintéticos.
+- Processos, fontes, unidades, contratos, credores/marcas operacionais e valores específicos conhecidos foram neutralizados.
+- O arquivo passou em verificação sintática JavaScript (node --check).
