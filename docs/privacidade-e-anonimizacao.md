@@ -1,205 +1,196 @@
-﻿# Privacy and Anonymization Policy
+# Política de Privacidade e Anonimização
 
-This repository contains a public, anonymized version of a workflow-analysis userscript.
+Este repositório contém uma versão pública e anonimizada de um userscript de análise de fluxo de processos.
 
-## Core principle
+## Princípio central
 
-The public version must preserve software logic while removing operational, personal, contractual, financial and institutional identifiers derived from real administrative processes.
+A versão pública deve preservar a lógica do software, removendo identificadores operacionais, pessoais, contratuais, financeiros e institucionais derivados de processos administrativos reais.
 
-## Information that must not be published
+## Informações que não devem ser publicadas
 
-The following data must be removed, generalized or replaced with synthetic examples:
+Os seguintes dados devem ser removidos, generalizados ou substituídos por exemplos sintéticos:
 
-- Real administrative process numbers
-- Real commitment / budget note numbers
-- Real funding-source identifiers
-- Real contract numbers
-- Real procurement or contracting objects
-- Real suppliers, creditors or contractors
-- CNPJ, CPF or other identification numbers
-- Real invoice or payment-document numbers
-- Real monetary values when linked to identifiable cases
-- Names of employees, public agents or third parties
-- Employee IDs, registration numbers or internal identifiers
-- Real email addresses
-- Internal organizational structures when unnecessarily specific
-- Authenticated SEI URLs
-- Internal IDs, hashes, tokens or signed parameters
-- Verification codes and CRC values
-- Real examples embedded in comments, logs or test cases
-- Screenshots, PDFs or generated reports containing real operational data
+- números reais de processos administrativos;
+- números reais de empenhos ou notas de empenho;
+- identificadores reais de fontes de recursos;
+- números reais de contratos;
+- objetos reais de compras, contratações ou despesas;
+- fornecedores, credores ou contratadas reais;
+- CNPJ, CPF ou outros números de identificação;
+- números reais de notas fiscais ou documentos de pagamento;
+- valores monetários reais quando associados a casos identificáveis;
+- nomes de servidores, agentes públicos ou terceiros;
+- matrículas ou identificadores internos;
+- endereços de e-mail reais;
+- estruturas organizacionais internas quando desnecessariamente específicas;
+- URLs autenticadas do SEI;
+- IDs internos, hashes, tokens ou parâmetros assinados;
+- códigos de verificação e valores de CRC;
+- exemplos reais incluídos em comentários, logs ou casos de teste;
+- capturas de tela, PDFs ou relatórios contendo dados operacionais reais.
 
-## Public examples
+## Exemplos públicos
 
-Examples included in this repository must use synthetic data.
+Os exemplos incluídos neste repositório devem utilizar dados sintéticos.
 
-Synthetic examples should:
+Os exemplos sintéticos devem:
 
-- Preserve the structure needed to demonstrate the software
-- Avoid reproducing real combinations of process, contract, creditor, value and funding source
-- Clearly state that the data is fictitious
-- Use generic organizational names and identifiers
-- Never point to a real SEI environment
+- preservar a estrutura necessária para demonstrar o funcionamento do software;
+- evitar reproduzir combinações reais de processo, contrato, credor, valor e fonte de recursos;
+- indicar claramente que os dados são fictícios;
+- utilizar nomes e identificadores organizacionais genéricos;
+- nunca apontar para um ambiente real do SEI.
 
-## Deterministic dictionaries
+## Dicionários determinísticos
 
-Operational dictionaries that associate real text patterns with real commitments, funding sources, contracts or creditors must not be published as-is.
+Dicionários operacionais que associem padrões textuais reais a empenhos, fontes de recursos, contratos ou credores não devem ser publicados como estão.
 
-The public version should contain only synthetic examples demonstrating the expected data structure.
+A versão pública deve conter apenas exemplos sintéticos que demonstrem a estrutura esperada.
 
-## Code comments
+## Comentários no código
 
-Comments must be reviewed with the same care as executable code.
+Os comentários devem ser revisados com o mesmo cuidado aplicado ao código executável.
 
-Real process numbers, contract numbers, commitment numbers, creditor names, values and other identifiable examples must be removed from comments and regression notes.
+Números reais de processos, contratos, empenhos, nomes de credores, valores e outros exemplos identificáveis devem ser removidos dos comentários e das notas de regressão.
 
-## Visual outputs
+## Saídas visuais
 
-Screenshots, PDFs, spreadsheets and printable outputs must be generated exclusively from synthetic data before publication.
+Capturas de tela, PDFs, planilhas e saídas para impressão devem ser gerados exclusivamente com dados sintéticos antes da publicação.
 
-## Separation of versions
+## Separação entre versões
 
-The internal working version and the public version are separate artifacts.
+A versão interna de trabalho e a versão pública são artefatos separados.
 
-The internal version may contain organization-specific configuration and real operational mappings.
+A versão interna pode conter configurações específicas da organização e mapeamentos operacionais reais.
 
-The public version must contain only anonymized logic, synthetic examples and generic configuration.
+A versão pública deve conter apenas lógica anonimizada, exemplos sintéticos e configurações genéricas.
 
-## Review rule
+## Regra de revisão
 
-Before publication, ask:
+Antes de publicar qualquer informação, faça a seguinte pergunta:
 
-> Could someone outside the organization use this information, alone or combined with other information, to identify a real process, contract, supplier, expenditure or person?
+> Uma pessoa de fora da organização poderia utilizar esta informação, isoladamente ou combinada com outras fontes, para identificar um processo, contrato, fornecedor, despesa ou pessoa real?
 
-If the answer is yes or uncertain, the information must be anonymized.
+Se a resposta for sim, ou houver dúvida, a informação deve ser anonimizada.
 
-## Anonymization decisions by data category
+# Decisões de anonimização por categoria de dados
 
-### Administrative process identifiers
+## Identificadores de processos administrativos
 
-**Public treatment: REMOVE OR REPLACE WITH SYNTHETIC IDENTIFIERS**
+**Tratamento público: REMOVER OU SUBSTITUIR POR IDENTIFICADORES SINTÉTICOS**
 
-Real administrative process identifiers must never appear in:
+Identificadores reais de processos administrativos nunca devem aparecer em:
 
-- executable source code;
-- dictionaries;
-- comments;
-- regression cases;
-- documentation;
-- screenshots;
-- examples;
-- logs committed to the repository.
+- código-fonte executável;
+- dicionários;
+- comentários;
+- casos de regressão;
+- documentação;
+- capturas de tela;
+- exemplos;
+- logs incluídos no repositório.
 
-Real identifiers such as organization-specific process numbers must be replaced with clearly synthetic identifiers, for example:
+Identificadores reais devem ser substituídos por valores claramente sintéticos, por exemplo:
 
-- `PROCESS_EXAMPLE_001`
-- `REGRESSION_CASE_001`
-- `SYNTHETIC_PROCESS_A`
+- `PROCESSO_EXEMPLO_001`
+- `CASO_REGRESSAO_001`
+- `PROCESSO_SINTETICO_A`
 
-Synthetic identifiers should preferably not reproduce the exact numbering format used by the real organization, reducing the possibility of accidental collision with a real process.
+Preferencialmente, os identificadores sintéticos não devem reproduzir exatamente o padrão de numeração utilizado pela organização real, reduzindo a possibilidade de coincidência acidental com um processo existente.
 
-Organization-specific dictionaries containing real process identifiers will not be anonymized entry by entry. They will be removed from the public source and replaced by a small synthetic demonstration dataset.
+Dicionários específicos da organização que contenham processos reais não devem ser anonimizados registro por registro.
 
-Comments describing real regression cases must preserve the technical reasoning while replacing the real case identifier with a synthetic case name.
+Eles devem ser removidos da versão pública e substituídos por um pequeno conjunto de dados sintéticos de demonstração.
 
-### Commitments / budget-note identifiers
+Comentários sobre casos reais de regressão devem preservar o raciocínio técnico, substituindo a identificação real por um caso sintético.
 
-**Public treatment: REMOVE REAL MAPPINGS AND REPLACE WITH SYNTHETIC DATASETS**
+## Empenhos e notas de empenho
 
-Real commitment or budget-note identifiers must not be published.
+**Tratamento público: REMOVER MAPEAMENTOS REAIS E SUBSTITUIR POR DADOS SINTÉTICOS**
 
-The public repository must not preserve real associations between:
+Identificadores reais de empenhos ou notas de empenho não devem ser publicados.
 
-- commitment / budget-note number;
-- funding source;
-- creditor or supplier;
-- contract;
-- administrative process;
-- procurement or expenditure object;
-- monetary value;
-- distinctive matching terms.
+O repositório público não deve preservar associações reais entre:
 
-These relationships may allow a real administrative case to be reconstructed even when one individual field has been anonymized.
+- empenho;
+- fonte de recursos;
+- credor ou fornecedor;
+- contrato;
+- processo administrativo;
+- objeto da despesa;
+- valor monetário;
+- termos distintivos utilizados para correspondência.
 
-For this reason, real operational dictionaries must be removed as a whole from the public version.
+Essas relações podem permitir a reconstrução de um caso administrativo real mesmo quando um dos campos foi anonimizado.
 
-The public version may preserve:
+Por esse motivo, dicionários operacionais reais devem ser removidos integralmente da versão pública.
 
-- the data structure;
-- the matching algorithm;
-- scoring logic;
-- confidence thresholds;
-- generic rule-engine behavior.
+A versão pública pode preservar:
 
-Demonstration dictionaries must contain entirely synthetic data and must not reproduce real combinations from the internal environment.
+- a estrutura dos dados;
+- o algoritmo de correspondência;
+- a lógica de pontuação;
+- os limites de confiança;
+- o comportamento genérico do motor de regras.
 
-Synthetic examples should use explicit identifiers such as:
+Os dicionários de demonstração devem conter apenas dados integralmente sintéticos e não devem reproduzir combinações reais do ambiente interno.
 
-- `SYNTHETIC_NE_001`
-- `SOURCE_EXAMPLE_A`
-- `SYNTHETIC_SUPPLIER_A`
-- `SYNTHETIC_CONTRACT_001`
+Exemplos de identificadores públicos:
 
-The objective is to demonstrate the software architecture, not to reproduce the organization's accounting database.
+- `NE_SINTETICA_001`
+- `FONTE_EXEMPLO_A`
+- `FORNECEDOR_FICTICIO_A`
+- `CONTRATO_EXEMPLO_001`
 
-### Funding-source identifiers
+O objetivo é demonstrar a arquitetura do software, e não reproduzir a base contábil ou financeira da organização.
 
-**Public treatment: REMOVE REAL VALUES AND REPLACE WITH SYNTHETIC PLACEHOLDERS**
+## Identificadores de fontes de recursos
 
-Real funding-source identifiers must not be published.
+**Tratamento público: REMOVER VALORES REAIS E SUBSTITUIR POR PLACEHOLDERS SINTÉTICOS**
 
-The public repository must not contain real source codes used by the organization, especially when they are associated with:
+Identificadores reais de fontes de recursos não devem ser publicados.
 
-- commitments;
-- contracts;
-- creditors;
-- administrative processes;
-- expenditure objects;
-- monetary values;
-- deterministic workflow rules.
+O repositório público não deve conter códigos reais de fontes de recursos utilizados pela organização, especialmente quando associados a:
 
-Real funding sources must be replaced with clearly synthetic identifiers, for example:
+- empenhos;
+- contratos;
+- credores;
+- processos administrativos;
+- objetos de despesa;
+- valores monetários;
+- regras determinísticas de workflow.
 
-- `SOURCE_EXAMPLE_A`
-- `SOURCE_EXAMPLE_B`
-- `SOURCE_INTERNAL_DEMO`
+As fontes reais devem ser substituídas por identificadores claramente sintéticos, por exemplo:
 
-The public code may preserve the logic that compares or classifies funding sources, but not the real source values or their operational associations.
+- `FONTE_EXEMPLO_A`
+- `FONTE_EXEMPLO_B`
+- `FONTE_INTERNA_DEMO`
 
-Real combinations such as commitment + funding source + creditor + object must be removed as a unit rather than anonymized field by field.
+O código público pode preservar a lógica utilizada para comparar ou classificar fontes de recursos, mas não os valores reais nem suas associações operacionais.
 
-### Organizational units
+Combinações como empenho + fonte + credor + objeto devem ser removidas como um conjunto, em vez de serem anonimizadas campo por campo.
 
-**Public treatment: GENERALIZE INTO CONFIGURABLE FUNCTIONAL GROUPS**
+## Unidades organizacionais
 
-Real organizational-unit identifiers must not be published.
+**Tratamento público: GENERALIZAR OU SUBSTITUIR POR IDENTIFICADORES SINTÉTICOS**
 
-The public version must not embed real unit names, acronyms or organizational paths.
+Identificadores reais de unidades organizacionais não devem ser publicados quando sua divulgação puder revelar a estrutura interna do ambiente de origem.
 
-Instead, the software should represent units by functional roles, for example:
-
-- finance;
-- accounting;
-- planning;
-- treasury;
-- external finance;
-- technical units.
-
-The public engine may preserve workflow rules such as:
-
-- process moved from planning to accounting;
-- process remains open in a technical unit;
-- process was sent to an external financial authority;
-- process returned to the internal finance circuit.
-
-However, the actual unit identifiers used by a real organization must reside only in local configuration.
-
-Synthetic examples may use values such as:
+A versão pública deve utilizar nomes genéricos, por exemplo:
 
 - `ORG/FIN`
-- `ORG/FIN/ACCOUNTING`
-- `ORG/FIN/PLANNING`
-- `ORG/FIN/TREASURY`
-- `ORG/TECH/UNIT-A`
+- `ORG/FIN/CONTABILIDADE`
+- `ORG/FIN/PLANEJAMENTO`
+- `ORG/FIN/TESOURARIA`
+- `ORG/TEC/UNIDADE-A`
 
-The public source code should consume configuration groups rather than hard-code organization-specific units.
+A lógica do software pode preservar conceitos como:
+
+- unidade financeira;
+- planejamento;
+- contabilidade;
+- tesouraria;
+- área técnica;
+- unidade externa.
+
+A versão pública deve demonstrar o comportamento do algoritmo sem depender da identificação real das unidades administrativas utilizadas no ambiente original.
