@@ -72,3 +72,134 @@ Before publication, ask:
 > Could someone outside the organization use this information, alone or combined with other information, to identify a real process, contract, supplier, expenditure or person?
 
 If the answer is yes or uncertain, the information must be anonymized.
+
+## Anonymization decisions by data category
+
+### Administrative process identifiers
+
+**Public treatment: REMOVE OR REPLACE WITH SYNTHETIC IDENTIFIERS**
+
+Real administrative process identifiers must never appear in:
+
+- executable source code;
+- dictionaries;
+- comments;
+- regression cases;
+- documentation;
+- screenshots;
+- examples;
+- logs committed to the repository.
+
+Real identifiers such as organization-specific process numbers must be replaced with clearly synthetic identifiers, for example:
+
+- `PROCESS_EXAMPLE_001`
+- `REGRESSION_CASE_001`
+- `SYNTHETIC_PROCESS_A`
+
+Synthetic identifiers should preferably not reproduce the exact numbering format used by the real organization, reducing the possibility of accidental collision with a real process.
+
+Organization-specific dictionaries containing real process identifiers will not be anonymized entry by entry. They will be removed from the public source and replaced by a small synthetic demonstration dataset.
+
+Comments describing real regression cases must preserve the technical reasoning while replacing the real case identifier with a synthetic case name.
+
+### Commitments / budget-note identifiers
+
+**Public treatment: REMOVE REAL MAPPINGS AND REPLACE WITH SYNTHETIC DATASETS**
+
+Real commitment or budget-note identifiers must not be published.
+
+The public repository must not preserve real associations between:
+
+- commitment / budget-note number;
+- funding source;
+- creditor or supplier;
+- contract;
+- administrative process;
+- procurement or expenditure object;
+- monetary value;
+- distinctive matching terms.
+
+These relationships may allow a real administrative case to be reconstructed even when one individual field has been anonymized.
+
+For this reason, real operational dictionaries must be removed as a whole from the public version.
+
+The public version may preserve:
+
+- the data structure;
+- the matching algorithm;
+- scoring logic;
+- confidence thresholds;
+- generic rule-engine behavior.
+
+Demonstration dictionaries must contain entirely synthetic data and must not reproduce real combinations from the internal environment.
+
+Synthetic examples should use explicit identifiers such as:
+
+- `SYNTHETIC_NE_001`
+- `SOURCE_EXAMPLE_A`
+- `SYNTHETIC_SUPPLIER_A`
+- `SYNTHETIC_CONTRACT_001`
+
+The objective is to demonstrate the software architecture, not to reproduce the organization's accounting database.
+
+### Funding-source identifiers
+
+**Public treatment: REMOVE REAL VALUES AND REPLACE WITH SYNTHETIC PLACEHOLDERS**
+
+Real funding-source identifiers must not be published.
+
+The public repository must not contain real source codes used by the organization, especially when they are associated with:
+
+- commitments;
+- contracts;
+- creditors;
+- administrative processes;
+- expenditure objects;
+- monetary values;
+- deterministic workflow rules.
+
+Real funding sources must be replaced with clearly synthetic identifiers, for example:
+
+- `SOURCE_EXAMPLE_A`
+- `SOURCE_EXAMPLE_B`
+- `SOURCE_INTERNAL_DEMO`
+
+The public code may preserve the logic that compares or classifies funding sources, but not the real source values or their operational associations.
+
+Real combinations such as commitment + funding source + creditor + object must be removed as a unit rather than anonymized field by field.
+
+### Organizational units
+
+**Public treatment: GENERALIZE INTO CONFIGURABLE FUNCTIONAL GROUPS**
+
+Real organizational-unit identifiers must not be published.
+
+The public version must not embed real unit names, acronyms or organizational paths.
+
+Instead, the software should represent units by functional roles, for example:
+
+- finance;
+- accounting;
+- planning;
+- treasury;
+- external finance;
+- technical units.
+
+The public engine may preserve workflow rules such as:
+
+- process moved from planning to accounting;
+- process remains open in a technical unit;
+- process was sent to an external financial authority;
+- process returned to the internal finance circuit.
+
+However, the actual unit identifiers used by a real organization must reside only in local configuration.
+
+Synthetic examples may use values such as:
+
+- `ORG/FIN`
+- `ORG/FIN/ACCOUNTING`
+- `ORG/FIN/PLANNING`
+- `ORG/FIN/TREASURY`
+- `ORG/TECH/UNIT-A`
+
+The public source code should consume configuration groups rather than hard-code organization-specific units.
