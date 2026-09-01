@@ -1,0 +1,44 @@
+[
+  {
+    "id": "PROCESSO_EXEMPLO_001",
+    "descricao": "Caso sintético com processo aberto em planejamento.",
+    "unidadesAbertas": [
+      "ORG/FIN/PLANEJAMENTO"
+    ],
+    "documentos": [
+      {
+        "titulo": "Despacho fictício",
+        "unidadeGeradora": "ORG/FIN/PLANEJAMENTO"
+      }
+    ],
+    "resultadoEsperado": "PROCESSO_EM_PLANEJAMENTO"
+  },
+  {
+    "id": "PROCESSO_EXEMPLO_002",
+    "descricao": "Caso sintético com processo aberto em contabilidade.",
+    "unidadesAbertas": [
+      "ORG/FIN/CONTABILIDADE"
+    ],
+    "documentos": [
+      {
+        "titulo": "Documento contábil fictício",
+        "unidadeGeradora": "ORG/FIN/CONTABILIDADE"
+      }
+    ],
+    "resultadoEsperado": "PROCESSO_EM_CONTABILIDADE"
+  },
+  {
+    "id": "PROCESSO_EXEMPLO_003",
+    "descricao": "Caso sintético com processo encaminhado para área técnica.",
+    "unidadesAbertas": [
+      "ORG/TEC/UNIDADE-A"
+    ],
+    "documentos": [
+      {
+        "titulo": "Solicitação técnica fictícia",
+        "unidadeGeradora": "ORG/FIN/PLANEJAMENTO"
+      }
+    ],
+    "resultadoEsperado": "PROVIDENCIA_TECNICA"
+  }
+]

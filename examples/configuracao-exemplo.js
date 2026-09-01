@@ -1,49 +1,49 @@
-﻿// Synthetic configuration example.
-// All identifiers in this file are fictitious.
+// Configuração pública de exemplo.
+// Todos os identificadores abaixo são fictícios.
 
-const EXAMPLE_CONFIG = {
-
-    organization: {
-        name: 'Example Public Organization',
-        acronym: 'EPO'
+const CONFIGURACAO_EXEMPLO = {
+    organizacao: {
+        nome: 'Órgão Público de Exemplo',
+        sigla: 'OPE'
     },
 
     sei: {
-        baseUrl: 'https://sei.example.gov/',
-        targetUnit: 'ORG/FIN/PLANNING'
+        urlBase: 'https://sei.exemplo.invalid/',
+        unidadeAlvo: 'ORG/FIN/PLANEJAMENTO'
     },
 
-    units: {
-        finance: [
+    unidades: {
+        financeiras: [
             'ORG/FIN',
-            'ORG/FIN/ACCOUNTING',
-            'ORG/FIN/PLANNING',
-            'ORG/FIN/TREASURY'
+            'ORG/FIN/PLANEJAMENTO',
+            'ORG/FIN/CONTABILIDADE',
+            'ORG/FIN/TESOURARIA'
         ],
 
-        externalFinance: [
-            'ORG/TREASURY/UNIT-A',
-            'ORG/TREASURY/UNIT-B'
+        tecnicas: [
+            'ORG/TEC/UNIDADE-A',
+            'ORG/TEC/UNIDADE-B'
         ],
 
-        technical: [
-            'ORG/TECH/UNIT-A',
-            'ORG/TECH/UNIT-B'
+        externas: [
+            'EXT/FIN/UNIDADE-A',
+            'EXT/FIN/UNIDADE-B'
         ]
     },
 
-    syntheticMappings: [
+    exemplosDeterministicos: [
         {
-            commitmentId: 'SYNTHETIC_NE_001',
-            fundingSource: 'SOURCE_EXAMPLE_A',
-            creditor: 'SYNTHETIC_SUPPLIER_A',
-            contract: 'SYNTHETIC_CONTRACT_001',
-            process: 'PROCESS_EXAMPLE_001',
-            family: 'example_service',
-            object: 'Synthetic service used only to demonstrate matching logic.',
-            distinctiveTerms: [
-                'SYNTHETIC_TERM_A',
-                'SYNTHETIC_TERM_B'
+            identificador: 'EXEMPLO_001',
+            empenho: 'NE_FICTICIA_001',
+            fonte: 'FONTE_EXEMPLO_A',
+            credor: 'FORNECEDOR_FICTICIO_A',
+            contrato: 'CONTRATO_EXEMPLO_001',
+            processo: 'PROCESSO_EXEMPLO_001',
+            familia: 'servico_exemplo',
+            objeto: 'Objeto fictício utilizado apenas para demonstrar a estrutura.',
+            palavrasDistintivas: [
+                'TERMO FICTICIO A',
+                'TERMO FICTICIO B'
             ]
         }
     ]
