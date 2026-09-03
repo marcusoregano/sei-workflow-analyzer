@@ -1,4 +1,4 @@
-# Guia prático de F12 no SEI para áreas financeiras
+# Guia prático de inspeção do SEI pelo navegador para áreas financeiras
 
 Este guia foi pensado para quem trabalha com **execução orçamentária, financeira, contratos, empenhos, liquidações, pagamentos, repasses e acompanhamento de processos** e quer entender melhor o que o navegador mostra enquanto utiliza o SEI.
 
@@ -10,7 +10,7 @@ O roteiro é:
 
 ```text
 1. observar a tela
-2. abrir o F12
+2. abrir as Ferramentas do Desenvolvedor
 3. localizar a ação no Network
 4. ver parâmetros e response
 5. localizar a mesma informação no HTML
@@ -22,11 +22,11 @@ O roteiro é:
 
 ---
 
-# 1. Primeiro contato com o F12
+# 1. Primeiro contato com as Ferramentas do Desenvolvedor
 
-Abra o SEI normalmente.
+Abra o SEI normalmente e abra as **Ferramentas do Desenvolvedor** do navegador.
 
-Pressione:
+Atalho comum:
 
 ```text
 F12
@@ -86,7 +86,7 @@ Primeiro localize essa informação na tela.
 Abra:
 
 ```text
-F12
+Ferramentas do Desenvolvedor
 → Elements / Elementos
 ```
 
@@ -143,7 +143,7 @@ texto: PROCESSO_EXEMPLO_001
 Abra:
 
 ```text
-F12
+Ferramentas do Desenvolvedor
 → Console
 ```
 
@@ -369,7 +369,7 @@ links que parecem relacionados ao processo
 Abra:
 
 ```text
-F12
+Ferramentas do Desenvolvedor
 → Network / Rede
 ```
 
@@ -1454,7 +1454,7 @@ o resultado continua correto quando a informação não existe?
 há mais de um elemento possível?
 ```
 
-Se ainda houver dúvida, continue no F12.
+Se ainda houver dúvida, continue nas Ferramentas do Desenvolvedor.
 
 ---
 
@@ -1584,9 +1584,9 @@ Esse registro torna o desenvolvimento muito mais organizado.
 
 ---
 
-# 46. Privacidade durante o uso do F12
+# 46. Privacidade durante o uso das Ferramentas do Desenvolvedor
 
-O F12 pode mostrar informações sensíveis.
+As Ferramentas do Desenvolvedor podem mostrar informações sensíveis.
 
 Antes de copiar qualquer coisa para documentação pública, revise:
 
@@ -1632,7 +1632,7 @@ pergunta pequena
 ↓
 ação manual
 ↓
-F12
+Ferramentas do Desenvolvedor
 ↓
 Network
 ↓
