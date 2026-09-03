@@ -14,26 +14,86 @@ Projeto experimental para exploração prática do SEI pelo navegador, com foco 
 - tabelas;
 - árvores de documentos;
 - páginas internas;
+- testes de debug no Console;
 - automações locais com JavaScript e userscripts.
 
 A proposta é simples:
 
 ```text
-clicar no SEI
-→ observar o F12
-→ identificar a requisição
-→ examinar parâmetros e response
-→ localizar a informação no HTML
-→ transformar em JavaScript
-→ testar
-→ incorporar ao script
+ação no SEI
+→ inspeção no navegador
+→ teste no Console
+→ identificação de request/response
+→ leitura de HTML/DOM/iframe
+→ validação
+→ função pequena
+→ userscript
 ```
 
 > Este repositório contém um snapshot público anonimizado. Os exemplos devem usar dados sintéticos.
 
-## 1. Comece pela aba Network
+## Exercícios práticos de debug
 
-Abra o SEI e pressione `F12`. Depois abra `Network / Rede`, limpe as requisições existentes e execute uma ação no SEI.
+Uma parte central deste repositório é aprender por experimentação direta no navegador.
+
+Os exercícios abaixo reproduzem uma sequência de investigação usada para descobrir comportamentos e transformar observações em código:
+
+1. [Encontrar um elemento no DOM](docs/exercicios-debug/01-encontrar-elemento-no-dom.md)
+2. [Investigar um iframe](docs/exercicios-debug/02-investigar-iframe.md)
+3. [Descobrir uma requisição no Network](docs/exercicios-debug/03-descobrir-requisicao-no-network.md)
+4. [Inspecionar uma função JavaScript já carregada](docs/exercicios-debug/04-inspecionar-funcao-javascript.md)
+5. [Da descoberta ao mini-script](docs/exercicios-debug/05-da-descoberta-ao-mini-script.md)
+
+A progressão é:
+
+```text
+DOM
+→ iframe
+→ request/response
+→ função JavaScript
+→ mini-script
+```
+
+A ideia não é decorar comandos, mas aprender a fazer perguntas pequenas e verificáveis, como:
+
+```text
+Onde esta informação está?
+Ela está no DOM principal ou em um iframe?
+Qual requisição aparece quando executo esta ação?
+O que veio na response?
+Existe alguma função JavaScript já carregada envolvida?
+Como transformar essa descoberta em uma função simples?
+```
+
+## Comece pela inspeção no navegador
+
+Abra o SEI normalmente e use as Ferramentas do Desenvolvedor do navegador.
+
+Atalhos comuns:
+
+```text
+F12
+Ctrl + Shift + I
+```
+
+As áreas mais úteis são:
+
+```text
+Network / Rede
+Elements / Elementos
+Console
+Sources / Fontes
+```
+
+## 1. Network: descobrir requisições
+
+Abra:
+
+```text
+Network / Rede
+```
+
+Limpe as requisições anteriores e execute uma única ação.
 
 Exemplos:
 
@@ -42,11 +102,10 @@ abrir processo
 abrir documento
 abrir árvore
 consultar histórico
-trocar de unidade
 abrir modal
 ```
 
-Exemplos de formatos que podem surgir:
+Exemplos sintéticos de requests:
 
 ```text
 GET controlador.php?acao=procedimento_trabalhar&id_procedimento=EXEMPLO
@@ -58,14 +117,14 @@ Abra uma requisição e examine:
 
 ```text
 Headers
-Payload
 Query String Parameters
+Payload
 Form Data
 Preview
 Response
 ```
 
-## 2. Examine os parâmetros
+## 2. Parâmetros e payloads
 
 Uma URL pode conter:
 
@@ -83,11 +142,39 @@ id_unidade=123
 id_procedimento=456
 ```
 
-Repita a mesma ação em dois processos diferentes e compare os parâmetros.
+Uma técnica útil é repetir a mesma ação em dois processos diferentes e comparar:
 
-## 3. Examine a response
+```text
+processo A
+↓
+requisição A
 
-Em `Network → requisição → Response`, você pode encontrar HTML, JSON, JavaScript, PDF ou texto.
+processo B
+↓
+requisição B
+```
+
+Observe o que mudou e o que permaneceu.
+
+## 3. Response
+
+Em:
+
+```text
+Network
+→ requisição
+→ Response
+```
+
+você pode encontrar:
+
+```text
+HTML
+JSON
+JavaScript
+PDF
+texto
+```
 
 Exemplo de HTML:
 
@@ -97,51 +184,97 @@ Exemplo de HTML:
 </div>
 ```
 
-## 4. Teste no Console
+## 4. DOM
 
-```javascript
-document.title
-location.href
-document.querySelector('body')
-document.querySelectorAll('a')
+Pense de forma prática:
+
+```text
+HTML
+= texto com marcação
+
+document
+= objeto que representa o documento atual
+
+DOM
+= árvore de nós mantida pelo navegador
 ```
 
-Para listar links:
+Exemplo:
 
-```javascript
-console.table(
-    [...document.querySelectorAll('a')].map(a => ({
-        texto: a.textContent.trim(),
-        href: a.getAttribute('href')
-    }))
-);
+```html
+<div>
+    <span>Nota de Empenho</span>
+</div>
 ```
 
-## 5. Liste IDs existentes
+Representação simplificada:
 
-```javascript
-console.table(
-    [...document.querySelectorAll('[id]')].map(el => ({
-        tag: el.tagName,
-        id: el.id
-    }))
-);
+```text
+Document
+└── div
+    └── span
+        └── "Nota de Empenho"
 ```
 
-## 6. Liste classes
+No Console:
 
 ```javascript
-console.table(
-    [...document.querySelectorAll('[class]')]
-        .slice(0, 200)
-        .map(el => ({
-            tag: el.tagName,
-            classe: el.className
-        }))
-);
+document.querySelector('span')
 ```
 
-## 7. Procure iframes
+Para ler o texto:
+
+```javascript
+document
+    .querySelector('span')
+    ?.textContent
+    ?.trim();
+```
+
+## 5. Procurar texto no DOM
+
+Se você vê na tela:
+
+```text
+Nota de Empenho
+```
+
+mas não sabe o seletor:
+
+```javascript
+const encontrados =
+    [...document.querySelectorAll('body *')]
+        .filter(el =>
+            el.children.length === 0 &&
+            el.textContent.includes('Nota de Empenho')
+        );
+
+console.log(encontrados);
+```
+
+Depois:
+
+```javascript
+const el = encontrados[0];
+
+console.log(el);
+console.log(el.parentElement);
+```
+
+E tente:
+
+```javascript
+el.closest('div')
+el.closest('tr')
+el.closest('table')
+el.closest('form')
+```
+
+## 6. Iframes
+
+Às vezes um conteúdo visível não está no `document` principal.
+
+Liste os iframes:
 
 ```javascript
 console.table(
@@ -151,183 +284,181 @@ console.table(
         src: frame.getAttribute('src')
     }))
 );
-
-window.frames.length
 ```
 
-## 8. Entre em um iframe
+Depois:
 
 ```javascript
-const frame = document.querySelector('iframe');
-const docFrame = frame.contentDocument;
+const frame =
+    document.querySelector('iframe');
 
-console.table(
-    [...docFrame.querySelectorAll('a')].map(a => ({
-        texto: a.textContent.trim(),
-        href: a.getAttribute('href')
-    }))
-);
+const docFrame =
+    frame?.contentDocument;
+
+console.log(docFrame);
 ```
 
-## 9. Procure texto no DOM
-
-```javascript
-const encontrados = [...document.querySelectorAll('body *')]
-    .filter(el =>
-        el.children.length === 0 &&
-        el.textContent.includes('Histórico')
-    );
-
-console.log(encontrados);
-console.log(encontrados[0]?.parentElement);
-```
-
-## 10. Suba pela árvore do DOM
-
-```javascript
-const el = document.querySelector('.algumaClasse');
-
-el.parentElement
-el.parentElement?.parentElement
-el.closest('table')
-el.closest('form')
-el.closest('div')
-```
-
-## 11. Examine formulários
-
-```javascript
-console.table(
-    [...document.forms].map(f => ({
-        id: f.id,
-        name: f.name,
-        action: f.action,
-        method: f.method
-    }))
-);
-```
-
-Campos:
-
-```javascript
-const formulario = document.forms[0];
-
-console.table(
-    [...formulario.elements].map(el => ({
-        nome: el.name,
-        tipo: el.type,
-        valor: el.value
-    }))
-);
-```
-
-## 12. Reproduza uma leitura com fetch
-
-Depois de identificar uma URL útil:
-
-```javascript
-const resposta = await fetch('URL_OBSERVADA');
-const html = await resposta.text();
-
-const parser = new DOMParser();
-const doc = parser.parseFromString(html, 'text/html');
-
-console.log(doc);
-```
-
-Liste links da response:
-
-```javascript
-console.table(
-    [...doc.querySelectorAll('a')].map(a => ({
-        texto: a.textContent.trim(),
-        href: a.getAttribute('href')
-    }))
-);
-```
-
-## 13. Transforme HTML em dados
-
-```javascript
-function extrairLinks(doc) {
-    return [...doc.querySelectorAll('a')].map(a => ({
-        texto: a.textContent.trim(),
-        href: a.getAttribute('href')
-    }));
-}
-
-const links = extrairLinks(doc);
-console.table(links);
-```
-
-Depois filtre:
-
-```javascript
-const linksProcesso = links.filter(item =>
-    item.href?.includes('procedimento')
-);
-```
-
-## 14. Caminho típico de exploração
+Pense assim:
 
 ```text
-ação manual
-↓
-Network
-↓
-request
-↓
+document
+= documento atual
+
+frame.contentDocument
+= documento carregado dentro do iframe
+```
+
+## 7. Funções JavaScript já carregadas
+
+Algumas ações da interface podem usar funções JavaScript já presentes na página.
+
+Exemplo:
+
+```javascript
+$.modalLink
+```
+
+Liste propriedades:
+
+```javascript
+Object.keys($.modalLink)
+```
+
+Teste:
+
+```javascript
+typeof $.modalLink.open
+```
+
+Se for função:
+
+```javascript
+$.modalLink.open.toString()
+```
+
+ou:
+
+```javascript
+console.log(
+    $.modalLink.open.toString()
+);
+```
+
+Isso pode ajudar a descobrir:
+
+```text
 parâmetros
+URLs
+opções
+mecanismos de modal
+ações disparadas pela interface
+```
+
+## 8. Quando olhar DOM e quando olhar Network
+
+Regra prática:
+
+```text
+se a informação já está na tela
+→ Elements
+→ DOM
+→ querySelector
+```
+
+```text
+se a informação aparece depois de uma ação
+→ Network
+→ request
+→ parâmetros/payload
+→ response
+→ depois DOM
+```
+
+## 9. Reproduzir uma leitura
+
+Depois de identificar uma URL de leitura:
+
+```javascript
+const resposta =
+    await fetch('URL_OBSERVADA');
+
+const html =
+    await resposta.text();
+```
+
+Converta para DOM:
+
+```javascript
+const doc =
+    new DOMParser()
+        .parseFromString(
+            html,
+            'text/html'
+        );
+```
+
+Agora:
+
+```javascript
+doc.querySelector(...)
+doc.querySelectorAll(...)
+```
+
+## 10. Da descoberta à função
+
+Exemplo:
+
+```javascript
+function textoDe(selector, doc = document) {
+    return doc
+        .querySelector(selector)
+        ?.textContent
+        ?.trim() ?? null;
+}
+```
+
+Uso:
+
+```javascript
+const processo =
+    textoDe('.numero-processo');
+
+const empenho =
+    textoDe('.empenho');
+
+const valor =
+    textoDe('.valor');
+
+console.table([
+    {
+        processo,
+        empenho,
+        valor
+    }
+]);
+```
+
+A sequência é:
+
+```text
+teste no Console
 ↓
-payload
+seletor
 ↓
-response
+função
 ↓
-HTML
-↓
-iframe
-↓
-DOM
-↓
-nós
-↓
-atributos
-↓
-extração
-↓
-função JavaScript
+teste em vários casos
 ↓
 userscript
 ```
 
-## 15. Ferramentas do F12 mais úteis
+## Guia prático de inspeção
 
-### Network
+O passo a passo mais completo está em:
 
-Use para observar GET, POST, query strings, payloads, responses, headers, documentos HTML e arquivos carregados.
+[Guia prático de inspeção do SEI pelo navegador](docs/guia-inspecao-navegador.md)
 
-### Elements
-
-Use para observar DOM, IDs, classes, atributos, iframes, formulários, tabelas e links.
-
-### Console
-
-Use para testar:
-
-```javascript
-document.querySelector(...)
-document.querySelectorAll(...)
-fetch(...)
-DOMParser()
-console.log(...)
-console.table(...)
-```
-
-### Sources
-
-Use para observar JavaScript carregado, funções, arquivos, eventos e comportamentos da interface.
-
-## 16. Estrutura do repositório
+## Estrutura do repositório
 
 ```text
 src/
@@ -336,33 +467,60 @@ src/
 docs/
     arquitetura.md
     auditoria-anonimizacao.txt
-    guia-f12.md
+    guia-inspecao-navegador.md
     montando-seu-script.md
     privacidade-e-anonimizacao.md
     proveniencia.md
+
+    exercicios-debug/
+        01-encontrar-elemento-no-dom.md
+        02-investigar-iframe.md
+        03-descobrir-requisicao-no-network.md
+        04-inspecionar-funcao-javascript.md
+        05-da-descoberta-ao-mini-script.md
 
 examples/
     configuracao-exemplo.js
     processos-sinteticos.json
 ```
 
-## 17. Privacidade
+## Privacidade
 
-Antes de publicar qualquer saída do F12, revise o conteúdo.
+Antes de publicar qualquer saída das Ferramentas do Desenvolvedor, revise o conteúdo.
 
-Podem aparecer processos, documentos, unidades, nomes, IDs, URLs, parâmetros, dados de formulários e informações de sessão.
+Podem aparecer:
 
-Nunca publique cookies, tokens, credenciais, cabeçalhos de autenticação, parâmetros assinados, URLs autenticadas ou dados reais de processos.
+- processos;
+- documentos;
+- unidades;
+- nomes;
+- IDs;
+- URLs;
+- parâmetros;
+- dados de formulários;
+- informações de sessão.
+
+Nunca publique:
+
+```text
+cookies
+tokens
+credenciais
+Authorization
+dados de sessão
+URLs autenticadas
+parâmetros assinados
+```
 
 Use exemplos sintéticos.
 
-## 18. Status
+## Status
 
 Versão pública atual: **v0.1.0**
 
 Status: **experimental**.
 
-## 19. Proveniência
+## Proveniência
 
 A primeira publicação pública foi derivada da fonte privada experimental:
 
@@ -370,10 +528,14 @@ A primeira publicação pública foi derivada da fonte privada experimental:
 v0.9.9.145
 ```
 
-O hash SHA-256 correspondente está registrado em `docs/proveniencia.md`.
+O hash SHA-256 correspondente está registrado em:
 
-## 20. Aviso
+```text
+docs/proveniencia.md
+```
 
-Projeto independente de estudo, scraping, RPA e automação local.
+## Aviso
+
+Projeto independente de estudo, scraping, RPA, debug no navegador e automação local.
 
 Não é um produto oficial do SEI, TRF4 ou de qualquer órgão público.
