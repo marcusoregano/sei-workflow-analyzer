@@ -909,11 +909,8 @@ src/
 
 docs/
     arquitetura.md
-    auditoria-anonimizacao.txt
     guia-inspecao-navegador.md
     montando-seu-script.md
-    privacidade-e-anonimizacao.md
-    proveniencia.md
 
     exercicios-debug/
         01-encontrar-elemento-no-dom.md
@@ -921,6 +918,11 @@ docs/
         03-descobrir-requisicao-no-network.md
         04-inspecionar-funcao-javascript.md
         05-da-descoberta-ao-mini-script.md
+
+    governanca/
+        auditoria-anonimizacao.txt
+        privacidade-e-anonimizacao.md
+        proveniencia.md
 
 examples/
     configuracao-exemplo.js
